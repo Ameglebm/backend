@@ -9,38 +9,38 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  nome      String
+  id             String   @id @default(uuid())
+  email          String   @unique
+  nome           String
   dataNascimento DateTime
-  role      Role
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role           Role
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   corretor Corretor?
   cliente  Cliente?
 }
 
 model Corretor {
-  id          String   @id @default(uuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id])
-  creci       String
-  cpf String @unique
-  foto String?
-  statusCreci Boolean
-  estado      String
-  cidade      String
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  creci           String
+  cpf             String    @unique
+  foto            String?
+  statusCreci     Boolean
+  estado          String
+  cidade          String
   dataVerificacao DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }
 
 model Cliente {
   id        String   @id @default(uuid())
   userId    String   @unique
   user      User     @relation(fields: [userId], references: [id])
-  foto String?
+  foto      String?
   estado    String
   cidade    String
   createdAt DateTime @default(now())
