@@ -8,37 +8,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Roles {
-  USER
-  CORRETORES
-  CLIENTES
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  nome      String
+  dataNascimento DateTime
+  role      Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  corretor Corretor?
+  cliente  Cliente?
 }
 
-// Model Users {
-//   id 
-//   email
+model Corretor {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  creci       String
+  cpf String @unique
+  foto String?
+  statusCreci Boolean
+  estado      String
+  cidade      String
+  dataVerificacao DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-//   @@map("users")
-// }
-  
-// Model Corretor {
-//   id
-//   nomeCorretor  //tambem vou analisar se vou puxar so nome ou nao
-//   email
-//   localizacao
-//   creci
-//   statusCreci
-//   role
-//   criadoEm
+model Cliente {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  foto String?
+  estado    String
+  cidade    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-//   @@map("corretor")
-// }
-
-// Model Cliente {
-//   id
-//   nomeCliente //ainda vou ver se o nome vou puxar somente um 
-//   email
-//   criadoEm
-
-//   @@map("cliente")
-// }
+enum Role {
+  CLIENTE
+  CORRETOR
+  ADMIN
+}
