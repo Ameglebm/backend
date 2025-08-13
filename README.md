@@ -59,7 +59,7 @@ Após autenticar com o Google, o usuário escolhe se deseja se registrar como **
 │   │   │   │   └── auth.dto.ts              # Definição de inputs/outputs da autenticação
 │   │   │   ├── interfaces/                  # Contratos que o service/repository devem seguir
 │   │   │   │   ├── authRepository.interface.ts  # Contrato de acesso a dados (Prisma) p/ Auth
-│   │   │   │   └── authService.interface.ts # Contrato da camada de serviço (regras Auth)
+│   │   │   │   └── authService.interface.ts     # Contrato da camada de serviço (regras Auth)
 │   │   │   ├── repository/                  # Comunicação com o banco de dados
 │   │   │   │   └── auth.repository.ts       # CRUD e consultas de usuários
 │   │   │   ├── service/                     # Regras de negócio da autenticação
@@ -68,6 +68,9 @@ Após autenticar com o Google, o usuário escolhe se deseja se registrar como **
 │   │   ├── corretor/                        # Módulo para gestão de corretores (cadastro, CRECI, status)
 │   │   ├── clientes/                        # Módulo para gestão de clientes
 │   │   ├── imovel/                          # Módulo de imóveis (CRUD, listagem, busca, etc.)
+│   │   └── common/                           # Utilitários compartilhados entre módulos
+│   │       └── enums/                       # Enums globais (ex: Role)
+│   │           └── role.enum.ts             # Enum com roles: CLIENTE, CORRETOR, ADMIN
 │   │
 │   ├── app.module.ts                        # Módulo raiz do NestJS — importa todos os outros módulos
 │   └── main.ts                              # Arquivo inicial — inicializa a aplicação
