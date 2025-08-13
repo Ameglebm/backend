@@ -7,3 +7,38 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Roles {
+  USER
+  CORRETORES
+  CLIENTES
+}
+
+// Model Users {
+//   id 
+//   email
+
+//   @@map("users")
+// }
+  
+// Model Corretor {
+//   id
+//   nomeCorretor  //tambem vou analisar se vou puxar so nome ou nao
+//   email
+//   localizacao
+//   creci
+//   statusCreci
+//   role
+//   criadoEm
+
+//   @@map("corretor")
+// }
+
+// Model Cliente {
+//   id
+//   nomeCliente //ainda vou ver se o nome vou puxar somente um 
+//   email
+//   criadoEm
+
+//   @@map("cliente")
+// }
