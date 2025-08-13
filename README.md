@@ -1,98 +1,148 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📃 Sobre o Projeto
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+O **ImobiFácil** é um sistema de gestão imobiliária desenvolvido com **NestJS** e **Prisma ORM**, com autenticação via **Google OAuth 2.0** e controle de acesso baseado em papéis (**RBAC**).  
+O sistema conecta **corretores** e **clientes**, permitindo gerenciamento de cadastros, imóveis e dados complementares.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**Fluxo de uso:**  
+Após autenticar com o Google, o usuário escolhe se deseja se registrar como **corretor** ou **cliente**:
 
-## Description
+- **Corretor**: informa **nome completo**, **número do CRECI**, **status do CRECI** (apenas ativos são aceitos) e **localização** (estado e cidade).  
+- **Cliente**: informa **nome completo** e **localização** (estado e cidade).
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Tecnologias Escolhidas e suas funcionalidades
 
-## Project setup
+| Tecnologia/Ferramenta      | Para que serve                                                                                  |
+|---------------------------|------------------------------------------------------------------------------------------------|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=nodejs" alt="Node.js"> **Node.js**               | Ambiente de execução JavaScript no servidor. Alta performance, ideal para APIs REST e apps modernos. |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=ts" alt="TypeScript"> **TypeScript (TS)**       | Superset do JavaScript com tipagem estática. Mais segurança e produtividade no desenvolvimento.|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=nest" alt="NestJS"> **NestJS**                | Framework backend modular baseado em TypeScript. Excelente para construção de APIs escaláveis e testáveis.|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=prisma" alt="Prisma ORM"> **Prisma ORM**            | ORM moderno, rápido e com suporte a tipagem. Interage com o banco de forma segura e eficiente.  |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL"> **PostgreSQL (Railway)**  | Banco de dados relacional confiável e robusto. Railway facilita o deploy e gestão inicial.      |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=aws" alt="AWS"> **AWS (futuramente)**     | Infraestrutura escalável para banco, arquivos (S3), serviços em nuvem e deployment (EKS).       |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=docker" alt="Docker"> **Docker**                | Containerização da aplicação. Garante portabilidade, isolamento de ambiente e compatibilidade entre dev e produção.|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=kubernetes" alt="Kubernetes"> **Kubernetes**            | Orquestração de contêineres Docker. Gerencia escalabilidade, balanceamento de carga, atualizações contínuas e alta disponibilidade.|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=nest" alt="class-validator"> **class-validator**       | Validação de dados com decorators em DTOs NestJS. Garante que os dados sejam corretos antes de processá-los.|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=haskell" alt="Bcrypt"> **Bcrypt**                | Hash seguro de senhas. Protege os dados sensíveis dos usuários.                                |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=gmail" alt="Nodemailer"> **Nodemailer**            | Envio de emails SMTP (ex: recuperação de senha, avisos de agendamento).                        |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=googlecloud" alt="Google OAuth"> **Google Provider (OAuth)**| Login seguro com conta Google. Melhora a experiência do usuário.
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=react" alt="Socket.IO"> **Socket.IO**             | Comunicação em tempo real entre cliente e corretor via WebSockets (ex: chat).                  |                               |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=redis" alt="Redis"> **Redis**                 | Banco de dados em memória. Usado para cache, gerenciamento de sessões e suporte a notificações em tempo real (usado com Socket.IO).|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=nest" alt="Autoguard"> **Autoguard**             | Geração automática de validações e contratos seguros entre client/backend.                      |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=nodejs" alt="Axios"> **Axios**                 | Cliente HTTP usado para comunicação com APIs externas (ex: serviços de geolocalização, e-mail, etc.).|
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=nodejs" alt="Helmet"> **Helmet**                | Middleware de segurança para proteger a aplicação contra vulnerabilidades comuns da web.      |
+| <img height="20" width="25" src="https://skillicons.dev/icons?i=nodejs" alt="Rate Limiter"> **Rate Limiter (rate-limiter-flexible)** | Previne ataques de força bruta limitando o número de requisições por IP.          |
+| <img height="17" width="21" src="http://fruzenshtein.com/wp-content/uploads/2014/12/swagger-ui-300x293.png" alt="Swagger"> **Swagger**               | Geração automática de documentação interativa da API. Útil para testes e integração com o front.|
 
-```bash
-$ npm install
-```
+---
 
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+# 📂 Estrutura de Pastas
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+/imobifacil-backend
+├── prisma/
+│   └── schema.prisma           # Schema do banco com Prisma ORM
+│
+├── src/
+│   ├── lib/
+│   │   └── prisma.ts           # Instância do PrismaClient
+│   │
+│   ├── middlewares/
+│   │   ├── auth.guard.ts       # Middleware de autenticação com JWT
+│   │   └── roles.guard.ts      # Middleware de controle de papéis (RBAC)
+│   │
+│   ├── models/
+│   │   ├── auth/               # Autenticação via Google OAuth + JWT
+│   │   ├── corretor/           # Cadastro e gestão de corretores
+│   │   ├── clientes/           # Cadastro e gestão de clientes
+│   │   ├── imovel/             # CRUD de imóveis
+│   │   └── common/             # Decorators e utilitários
+│   │
+│   ├── app.module.ts           # Módulo principal da aplicação
+│   └── main.ts                 # Arquivo de bootstrap da aplicação
+│
+├── .env                        # Variáveis de ambiente (Google OAuth, DB, JWT)
+└── README.md
 ```
+## 🚀 Começando
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. Clonar o repositório
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+git clone  https://github.com/Ameglebm/backend
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Instalar dependências
 
-## Resources
+```bash
+npm install
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 3. Configurar o banco de dados
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Configure o arquivo `.env` com a sua URL de conexão do banco PostgreSQL
 
-## Support
+```env
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/imobifacil"
+JWT_SECRET="sua_chave_jwt"
+GOOGLE_CLIENT_ID="id_do_google"
+GOOGLE_CLIENT_SECRET="segredo_do_google"
+GOOGLE_CALLBACK_URL="http://localhost:3000/auth/google/callback"
+CLIENT_URL="http://localhost:5173"
+```
+### 4. Rodar as migrações e iniciar o projeto
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npx prisma migrate dev
+npm run start:dev
+```
 
-## Stay in touch
+## 🔢 Scripts disponíveis
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+# Modo desenvolvimento
+npm run start:dev
 
-## License
+# Modo produção
+npm run start:prod
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Rodar testes
+npm run test
+
+# Testes E2E
+npm run test:e2e
+
+# Cobertura de testes
+npm run test:cov
+```
+
+## 🗕️ Funcionalidades principais
+
+- Login seguro com Google OAuth 2.0
+- Emissão de JWT para autenticação
+- RBAC (controle de acesso baseado em papéis) para CORRETOR e CLIENTE
+- Cadastro de corretores com verificação de CRECI
+- CRUD de imóveis
+- Middleware para autenticação e autorização
+
+## 📦 Deploy
+O projeto pode ser deployado em qualquer ambiente Node.js, como:
+
+- Railway
+- Render
+- AWS
+- Heroku
+
+## 📦 Módulos Principais
+
+| Módulo     | Descrição                                | Endpoints Principais            |
+|------------|-----------------------------------------|--------------------------------|
+| Auth       | Autenticação via Google OAuth + JWT     | /auth/google, /auth/google/callback |
+| Corretores | Cadastro e gestão de corretores         | /corretores                    |
+| Clientes   | Cadastro e gestão de clientes            | /clientes                     |
+| Imóveis    | CRUD de imóveis                          | /imoveis                      |
+
+## 🚧 Autor
+
+- Nome: **Alisson**
+- GitHub: [Ameglebm](https://github.com/Ameglebm)
+- Email: [ameglevr@gmail.com](mailto:ameglevr@gmail.com)
