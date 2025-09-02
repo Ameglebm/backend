@@ -1,0 +1,23 @@
+### Testar callback do Google (vai gerar JWT e retornar usuário)
+GET http://localhost:3000/auth/google
+
+### (após login no Google, vai redirecionar para o frontend com o token JWT na URL)
+http://localhost:5173/auth/callback?token={{ token }}
+
+### Escolher role após login (precisa do token JWT)
+PATCH http://localhost:3000/auth/chooseRole
+Authorization: Bearer {{ token }}
+Content-Type: application/json
+
+{
+  "role": "CORRETOR"
+}
+
+### Escolher role como cliente
+PATCH http://localhost:3000/auth/chooseRole
+Authorization: Bearer {{ token }}
+Content-Type: application/json
+
+{
+  "role": "CLIENTE"
+}
