@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsNotEmpty, IsEnum, } from "class-validator";
-import { Role } from "../../common/enums/role.enum";
+import { Role } from "@prisma/client";
 
 export class ChooseRoleDto {
     @ApiProperty({ description: 'Role do usuário', example: Role.CORRETOR, enum: Role })

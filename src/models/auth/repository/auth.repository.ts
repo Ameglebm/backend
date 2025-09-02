@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { prisma } from "../../../lib/prisma";
-import { Role } from "../../common/enums/role.enum";
+import { Role } from "@prisma/client";
 import { IAuthRepository } from "../interfaces/authRepository.interface";
 
 @Injectable()
