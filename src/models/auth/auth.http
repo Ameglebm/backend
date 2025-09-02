@@ -1,0 +1,18 @@
+### Testar ping do módulo de autenticação
+GET http://localhost:3000/auth/ping
+Authorization: Bearer {{ token }}
+
+### Iniciar login com Google OAuth
+GET http://localhost:3000/auth/google
+
+### Callback do Google (o Google redireciona aqui com ?code=...)
+GET http://localhost:3000/auth/google/callback?code=EXEMPLO_CODE
+
+### Rota para gerar JWT manualmente (se tiver)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "password": "123456"
+}

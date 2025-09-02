@@ -1,0 +1,19 @@
+### Criar corretor
+POST http://localhost:3000/corretor
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+  "creci": "123456-F",
+  "cpf": "12345678900",
+  "estado": "SP",
+  "cidade": "São Paulo"
+}
+
+### Listar corretores
+GET http://localhost:3000/corretor
+Authorization: Bearer {{ token }}
+
+### Buscar corretor pelo ID
+GET http://localhost:3000/corretor/{{ corretorId }}
+Authorization: Bearer {{ token }}
