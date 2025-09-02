@@ -1,18 +1,23 @@
-### Testar ping do módulo de autenticação
-GET http://localhost:3000/auth/ping
-Authorization: Bearer {{ token }}
-
-### Iniciar login com Google OAuth
+### Testar callback do Google (vai gerar JWT e retornar usuário)
 GET http://localhost:3000/auth/google
 
-### Callback do Google (o Google redireciona aqui com ?code=...)
-GET http://localhost:3000/auth/google/callback?code=EXEMPLO_CODE
+### (após login no Google, vai redirecionar para o frontend com o token JWT na URL)
+http://localhost:5173/auth/callback?token={{ token }}
 
-### Rota para gerar JWT manualmente (se tiver)
-POST http://localhost:3000/auth/login
+### Escolher role após login (precisa do token JWT)
+PATCH http://localhost:3000/auth/chooseRole
+Authorization: Bearer {{ token }}
 Content-Type: application/json
 
 {
-  "email": "usuario@email.com",
-  "password": "123456"
+  "role": "CORRETOR"
+}
+
+### Escolher role como cliente
+PATCH http://localhost:3000/auth/chooseRole
+Authorization: Bearer {{ token }}
+Content-Type: application/json
+
+{
+  "role": "CLIENTE"
 }

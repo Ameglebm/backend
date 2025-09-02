@@ -1,11 +1,12 @@
-import { Controller, Get, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, UseGuards, Req, Patch, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from '../service/auth.service';
+import { ChooseRoleDto } from '../dtos/authDTO';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   @Get('google')
   @UseGuards(AuthGuard('google'))
@@ -35,6 +36,19 @@ export class AuthController {
         },
       },
     },
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Erro interno do servidor',
+    content: {
+      'application/json': {
+        example: {
+          statusCode: 500,
+          message: 'Erro interno do servidor',
+          error: 'Internal Server Error',
+        }
+      }
+    }
   })
   async googleAuth() {
     // Não precisa implementar nada aqui,
@@ -81,7 +95,83 @@ export class AuthController {
       },
     },
   })
+  @ApiResponse({
+    status: 500,
+    description: 'Erro interno do servidor',
+    content: {
+      'application/json': {
+        example: {
+          statusCode: 500,
+          message: 'Erro interno do servidor',
+          error: 'Internal Server Error',
+        }
+      }
+    }
+  })
   async googleAuthRedirect(@Req() req) {
     return this.authService.googleLogin(req.user);
+  }
+
+  @Patch('chooseRole')
+  @UseGuards(AuthGuard('jwt'))
+  @ApiOperation({ summary: 'Escolher papel (CLIENTE ou CORRETOR) após login' })
+  @ApiResponse({
+    status: 200,
+    description: 'Papel atualizado com sucesso',
+    content: {
+      'application/json': {
+        example: {
+          id: 'user-id',
+          email: 'usuario@email.com',
+          nome: 'Fulano de Tal',
+          role: 'CORRETOR',
+          createdAt: '2023-10-01T00:00:00.000Z',
+          updatedAt: '2023-10-01T00:00:00.000Z',
+        },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Não autorizado',
+    content: {
+      'application/json': {
+        example: {
+          statusCode: 401,
+          message: 'Não autorizado',
+          error: 'Unauthorized',
+        }
+      }
+    }
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Requisição inválida',
+    content: {
+      'application/json': {
+        example: {
+          statusCode: 400,
+          message: ['Role deve ser um valor válido', 'Role não pode estar vazia'],
+          error: 'Bad Request',
+        }
+      }
+    }
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Erro interno do servidor',
+    content: {
+      'application/json': {
+        example: {
+          statuCode: 500,
+          message: 'Erro interno do servidor',
+          error: 'Internal Server Error',
+        }
+      }
+    }
+  })
+  async chooseRole(@Req() req, @Body() dto: ChooseRoleDto) {
+    const userId = req.user.sub; // ID extraído do JWT
+    return this.authService.chooseRole(userId, dto.role);
   }
 }

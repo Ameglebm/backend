@@ -25,4 +25,4 @@ import { PassportModule } from '@nestjs/passport';
   providers: [AuthService, GoogleStrategy],
   exports: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule { }

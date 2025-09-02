@@ -4,8 +4,11 @@ import { AuthModule } from './models/auth/auth.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), // lê .env
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env'],
+    }),
     AuthModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
