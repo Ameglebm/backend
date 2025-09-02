@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { prisma } from '../../../lib/prisma';
-import { Role } from '../../common/enums/role.enum';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class AuthService {

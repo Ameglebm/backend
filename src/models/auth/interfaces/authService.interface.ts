@@ -1,5 +1,4 @@
-import { User } from "generated/prisma";
-import { Role } from "../../common/enums/role.enum";
+import { User, Role } from "@prisma/client"; 
 
 export interface IAuthService {
   validateOrCreateUserFromGoogle(googleUser: { email: string; name: string }): Promise<User>;

@@ -13,7 +13,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Validations automáticas
+  // Validaçõess automáticas
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true, // remove propriedades não definidas no DTO
     forbidNonWhitelisted: true, // lança erro se enviar propriedades extras
